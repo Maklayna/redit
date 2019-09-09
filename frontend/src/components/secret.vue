@@ -31,13 +31,17 @@ export default {
       this.msg= await result.data;
       } catch(e) {
         this.msg='Либо вы не авторизованы'
-        console.log(e)
       }  
         
     },
   },
   mounted() {
-    this.getData()
+    
+     try {
+      this.getData();
+    } catch (e) {
+      console.log('User unavtoraised');
+    }
   }
 
 };

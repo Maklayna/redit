@@ -16,7 +16,7 @@
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input
-         v-model="password"
+          v-model="password"
           type="password"
           class="form-control"
           id="exampleInputPassword1"
@@ -53,7 +53,7 @@ export default {
           this.$router.push('/secret');
         });
     },
-  }
+  },
 };
 </script>
 
