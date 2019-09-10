@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="login" style="display:flex; justify-content:center; width: 400px;">
+  <form class="d-flex flex-row justify-content-center align-items-center w-50" @submit.prevent="login" >
     <fieldset>
       <legend>Войти</legend>
       <div class="form-group">
@@ -41,7 +41,7 @@ export default {
     login() {
       axios
         .post(
-          'http://localhost:3000/api/login/',
+          '/api/login/',
           {
             username: this.username,
             password: this.password,
@@ -50,7 +50,7 @@ export default {
         )
         .then(res => {
           this.$store.commit('SET_USER', res.data);
-          this.$router.push('/secret');
+          this.$router.replace('/');
         });
     },
   },

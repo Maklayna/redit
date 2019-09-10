@@ -4,6 +4,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 const db = require('mongoose');
@@ -12,7 +13,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
 const apiRouter = require('./routes/api');
 
-let corsOptions = {
+app.use(
+  fileUpload({
+    createParentPath: true,
+  }),
+);
+const corsOptions = {
   origin: 'http://localhost:8080',
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -24,9 +30,12 @@ app.use(
     secret: 'Insert randomized text here',
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      expires: 86400000,
+    },
   }),
 );
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());

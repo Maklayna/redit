@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Home from '../components/Home';
 import registration from '../components/registration';
 import login from '../components/login';
-import secret from '../components/secret';
+import secret from '../components/gallery';
 
 Vue.use(Router);
 
@@ -25,8 +25,8 @@ export default new Router({
       component: login,
     },
     {
-      path: '/secret',
-      name: 'secret',
+      path: '/gallery',
+      name: 'gallery',
       component: secret,
     },
   ],

@@ -1,7 +1,8 @@
 <template>
-  <form @submit.prevent="registration" style="display:flex; justify-content:center; width: 400px;">
+  <form @submit.prevent="registration" class="d-flex flex-row justify-content-center align-items-center w-50">
     <fieldset>
       <legend>Зарегистрироваться</legend>
+      <p class="text-danger">{{error}}</p>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input
@@ -35,16 +36,24 @@ export default {
     return {
       username: '',
       password: '',
+      error:'',
     };
   },
   methods: {
      registration () {
-         axios.post('http://localhost:3000/api/registration/',{
+         axios.post('/api/registration/',{
            username: this.username,
            password: this.password
            }
          )
-         .then(res=>this.$router.push('/'))
+         .then(res=>{
+           if (res.data){
+             console.log(res.data)
+           this.$router.replace('/gallery')
+           } else {
+            this.error='Данное имя пользователя занято.'
+           }
+           })
      } 
   }
 };

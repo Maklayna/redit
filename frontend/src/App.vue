@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="d-flex flex-column justify-content-center align-items-center w-100">
     <navBar />
     <transition mode="out-in" name="fade">
       <router-view />
@@ -16,9 +16,15 @@ export default {
   methods: {
     async userData() {
       axios
-        .post('http://localhost:3000/api/user/', {}, { withCredentials: true })
-        .then(res => this.$store.commit('SET_USER', res.data))
-        .catch(err => console.log('User unavtoraised'));
+        .post('/api/user/', {}, { withCredentials: true })
+        .then(res => {
+          this.$store.commit('SET_USER', res.data)
+          this.$router.replace('/').catch(e=>{})
+          })
+        .catch(err => {
+          console.log('User unavtoraised')
+          this.$router.replace('/login').catch(e=>{})
+          });
     },
   },
   mounted() {
@@ -30,7 +36,7 @@ export default {
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.3s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
