@@ -75,7 +75,7 @@ router.delete('/images', auth, async (req, res) => {
   res.json(true);
 });
 router.put('/images', auth, async (req, res) => {
-  const { _id, text } = req.session.passport;
+  const { _id, text } = req.body;
   await Image.findByIdAndUpdate(_id, { description: text });
   res.json(true);
 });

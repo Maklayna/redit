@@ -4,16 +4,18 @@
     <h1>{{isLogin}}</h1>
     <p>{{msg}}</p>
     <div class="d-flex flex-wrap justify-content-between w-75">
-      <imageCard  @delete="getData" v-if="$store.state.curentUser":key =image._id v-for="image in images" :src="image.tmb_src" :description="image.description" :id="image._id"></imageCard>
+      <imageCard  @updateData="getData" v-if="$store.state.curentUser":key =image._id v-for="image in images" :src="image.tmb_src" :description="image.description" :id="image._id"></imageCard>
     </div>
+    
   </div>
 </template>
 <script>
 import axios from 'axios';
+
 import imageCard from '@/components/imageCard.vue';
 export default {
   name: 'secret',
-  components: { imageCard },
+  components: { imageCard},
   data() {
     return {
       msg: 'Совсем ничего',
